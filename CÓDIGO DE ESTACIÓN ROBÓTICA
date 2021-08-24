@@ -1,0 +1,143 @@
+MODULE Module1
+    CONST robtarget Target_20_aprox:=[[1448,0,690],[0,0,1,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_20:=[[1448,0,590],[0,0,1,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_40:=[[10.798241222,1283.431191061,1360.215320369],[0.01743262,-0.672540561,0.73985445,-0.000830829],[1,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_30_aprox:=[[-150,850,500],[0,-0.707106781,0.707106781,0],[1,-2,1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_30:=[[-150,850,400],[0,-0.707106781,0.707106781,0],[1,-2,1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_reposo:=[[1111.588995348,0,1270.14730631],[0.190808996,0,0.981627183,0],[0,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_300:=[[-150,850,600],[0,-0.707106781,0.707106781,0],[1,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_30_aproxx:=[[-150,850,700],[0,-0.707106781,0.707106781,0],[1,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_30_aproxxx:=[[-150,850,900],[0,-0.707106781,0.707106781,0],[1,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_3000:=[[-150,850,800],[0,-0.707106781,0.707106781,0],[1,-1,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+
+    VAR num offsX;
+    VAR num offsY;
+    VAR num offsZ;
+
+
+
+    PROC main()
+        SetDO DO_start,0;
+        SetDO DO_piezas,0;
+        SetDO DO_attach_detach,0;
+
+        inicio:
+
+        SetDO DO_paletizado,0;
+
+
+        path_reposo;
+        IF DI_operario=1 THEN
+            SetDO DO_start,1;
+            SetDO DO_piezas,1;
+
+        ELSE
+            GOTO inicio;
+        ENDIF
+        !esperemos a que llegue la copia de la caja al sensor plano
+
+        WaitDI DI_FC_cinta,1;
+
+        FOR i FROM 0 TO 1 DO
+            FOR j FROM 0 TO 1 DO
+                WaitDI DI_FC_cinta,1;
+                Path_10;
+                offsY:=offsY+100;
+                path_reposo;
+            ENDFOR
+            offsY:=0;
+            offsX:=offsX+100;
+        ENDFOR
+
+        offsX:=0;
+        offsY:=0;
+
+        FOR ii FROM 0 TO 1 DO
+            FOR jj FROM 0 TO 1 DO
+                WaitDI DI_FC_cinta,1;
+                Path_20;
+                offsY:=offsY+100;
+                path_reposo;
+            ENDFOR
+            offsY:=0;
+            offsX:=offsX+100;
+        ENDFOR
+
+        offsX:=0;
+        offsY:=0;
+
+        FOR iii FROM 0 TO 1 DO
+            FOR jjj FROM 0 TO 1 DO
+                WaitDI DI_FC_cinta,1;
+                Path_30;
+                offsY:=offsY+100;
+                path_reposo;
+            ENDFOR
+            offsY:=0;
+            offsX:=offsX+100;
+        ENDFOR
+
+
+        offsX:=0;
+        offsY:=0;
+
+
+        SetDO DO_paletizado,1;
+        WaitTime 2;
+
+        GOTO inicio;
+        path_reposo;
+
+    ENDPROC
+
+    PROC path_reposo()
+        MoveL Target_reposo,v1000,z100,MyTool\WObj:=wobj0;
+    ENDPROC
+
+
+    !SetDO DO_paletizado,0;
+    !path_reposo;
+    !SetDO DO_start,1;
+    !SetDO DO_piezas,1;
+    !WaitDI DI_FC_cinta,1;
+    !WaitDI DI_FC_cinta,1;
+    !Path_10;
+    !path_reposo;
+    !path_reposo;
+
+    PROC Path_10()
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Target_20,v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,1;
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Offs(Target_30_aprox,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Offs(Target_30,offsX,offsY,offsZ),v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,0;
+        MoveL Offs(Target_30_aprox,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+
+    ENDPROC
+
+    PROC Path_20()
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Target_20,v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,1;
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Offs(Target_30_aproxx,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Offs(Target_300,offsX,offsY,offsZ),v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,0;
+        MoveL Offs(Target_30_aproxx,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+
+    ENDPROC
+
+    PROC Path_30()
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Target_20,v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,1;
+        MoveL Target_20_aprox,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Offs(Target_30_aproxxx,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveLDO Offs(Target_3000,offsX,offsY,offsZ),v1000,fine,MyTool\WObj:=WO_paletizado,DO_attach_detach,0;
+        MoveL Offs(Target_30_aproxxx,offsX,offsY,offsZ),v1000,z100,MyTool\WObj:=WO_paletizado;
+        MoveL Target_40,v1000,z100,MyTool\WObj:=WO_paletizado;
+
+    ENDPROC
+ENDMODULE

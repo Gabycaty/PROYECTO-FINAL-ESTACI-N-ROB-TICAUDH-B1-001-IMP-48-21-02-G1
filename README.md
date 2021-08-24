@@ -1,6 +1,15 @@
 # PROYECTO-FINAL-ESTACIÓN-ROBÓTICA-UDH-B1-001-IMP-48-21-02-G1
 ***
 En este proyecto Desarrollamos una estación robótica en el RobotStudio donde se realiza la función de pick and place de cajas y un paletizado a 3 niveles 2x2, con su sistema de señales digitales, entradas y salidas, necesarias para mantener una ejecución sincronizada entre todos los elementos que conforman la estación.
+## INSTALACIÓN
+Manual del operador utilizado para la instalación del software requerido.
+
+https://www.utorrent.com/intl/es/downloads/win/
+
+VIDEO PASO A PASO DE INSTALACIÓN DE SOFTWARE
+
+https://www.youtube.com/watch?v=8ojThPUIy0E
+
 ## VIDEO Y DOCUMENTO DEL PROYECTO
 https://drive.google.com/drive/folders/1PpnUieGnfTNXPmJEb_ha1YWGMYZfyg4B
 ## AÉREA DE LA INSTALACIÓN DEL PALETIZADO
@@ -25,3 +34,15 @@ https://drive.google.com/drive/folders/1PpnUieGnfTNXPmJEb_ha1YWGMYZfyg4B
 
 ## DIGITAL IMPUT DEL CONTROLADOR
 ![image](https://user-images.githubusercontent.com/73956322/130546196-8775d52a-ee58-4d04-b71f-f50e55463f2f.png)
+## AUTORES
+Isamar Villarreal
+
+Gabriela Reyes
+
+Angel Flecher
+## Expresiones de Gratitud 
+Primeramente agradecemos la oportunidad de haber podido culminar este curso con usted profesor Pablo Gonalez, estamos muy contentos con el apredizaje del programa Robotstudio el cual estamos seguros que nos va a seguir funcionando para el futuro.
+## REFERENCIAS
+https://github.com/uLatinaPma-Mechatronics/Sistemas-flexibles-manufactura/tree/master/term-projects/Robotontrack_project
+https://www.youtube.com/watch?v=P-pxREzQ25w&feature=youtu.be
+https://www.youtube.com/watch?v=SD02EzzvRLU&feature=youtu.be
